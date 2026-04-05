@@ -1,0 +1,94 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "EAST EA900 G4 UPS",
+        "description": "Connect to your UPS through a Modbus TCP gateway (RS232 adapter).",
+        "data": {
+          "host": "Host",
+          "port": "Port",
+          "slave_id": "Modbus slave ID"
+        },
+        "data_description": {
+          "host": "IP address or hostname of the Modbus TCP gateway",
+          "port": "Modbus TCP port (often 502)",
+          "slave_id": "Slave (unit) ID configured on the gateway, typically 1–247"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not read telemetry from the UPS. Check host, port, and slave ID."
+    },
+    "abort": {
+      "already_configured": "This device is already configured"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "bypass_voltage_a": { "name": "Bypass voltage L1" },
+      "bypass_current_a": { "name": "Bypass current L1" },
+      "bypass_frequency": { "name": "Bypass frequency" },
+      "bypass_power_factor": { "name": "Bypass power factor" },
+      "input_voltage_a": { "name": "Input voltage L1" },
+      "input_voltage_b": { "name": "Input voltage L2" },
+      "input_voltage_c": { "name": "Input voltage L3" },
+      "input_current_a": { "name": "Input current L1" },
+      "input_current_b": { "name": "Input current L2" },
+      "input_current_c": { "name": "Input current L3" },
+      "input_frequency": { "name": "Input frequency" },
+      "input_power_factor": { "name": "Input power factor" },
+      "output_voltage_a": { "name": "Output voltage L1" },
+      "output_current_a": { "name": "Output current L1" },
+      "output_frequency": { "name": "Output frequency" },
+      "output_power_factor": { "name": "Output power factor" },
+      "output_apparent_power": { "name": "Output apparent power" },
+      "output_active_power": { "name": "Output active power" },
+      "output_reactive_power": { "name": "Output reactive power" },
+      "output_load_percent": { "name": "Output load" },
+      "battery_voltage": { "name": "Battery voltage" },
+      "battery_current": { "name": "Battery current" },
+      "battery_temperature": { "name": "Battery temperature" },
+      "battery_runtime_remaining": { "name": "Battery runtime remaining" },
+      "battery_capacity": { "name": "Battery capacity" },
+      "inverter_current": { "name": "Inverter current" },
+      "rectifier_temperature": { "name": "Rectifier temperature" },
+      "inverter_temperature": { "name": "Inverter temperature" },
+      "status_word": { "name": "Status word" },
+      "system_operating_mode": { "name": "System operating mode" }
+    },
+    "binary_sensor": {
+      "bus_high_voltage": { "name": "BUS high voltage" },
+      "overtemperature": { "name": "Overtemperature" },
+      "output_short_circuit": { "name": "Output short circuit" },
+      "overload_fault": { "name": "Overload fault" },
+      "fan_failed": { "name": "Fan failure" },
+      "epo": { "name": "EPO" },
+      "battery_disconnected": { "name": "Battery disconnected" },
+      "input_overcurrent": { "name": "Input overcurrent" },
+      "high_battery_voltage": { "name": "High battery voltage" },
+      "charger_failure": { "name": "Charger failure" },
+      "low_battery_voltage_fault": { "name": "Low battery voltage" },
+      "bypass_fault": { "name": "Bypass fault" },
+      "mains_high_voltage": { "name": "Mains high voltage" },
+      "mains_frequency_abnormal": { "name": "Mains frequency abnormal" },
+      "battery_end_of_discharge": { "name": "Battery end of discharge" },
+      "battery_test_success": { "name": "Battery test successful" },
+      "battery_test_failed": { "name": "Battery test failed" },
+      "mains_abnormality": { "name": "Mains abnormal" },
+      "bypass_abnormality": { "name": "Bypass abnormal" },
+      "overload_alarm": { "name": "Overload alarm" },
+      "inverter_abnormality": { "name": "Inverter abnormal" },
+      "maintain_bypass_enabled": { "name": "Maintenance bypass enabled" },
+      "test_mode": { "name": "Test mode" }
+    },
+    "button": {
+      "clear_fault": { "name": "Clear fault" },
+      "buzzer_silence": { "name": "Silence buzzer" },
+      "manual_switch_bypass": { "name": "Manual switch to bypass" },
+      "manual_switch_inverter": { "name": "Manual switch to inverter" },
+      "battery_test_20s": { "name": "Battery test (20 s discharge)" },
+      "battery_maintenance": { "name": "Battery maintenance discharge" },
+      "stop_battery_test": { "name": "Stop battery test" }
+    }
+  }
+}
