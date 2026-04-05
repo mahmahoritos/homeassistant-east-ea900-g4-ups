@@ -16,9 +16,11 @@ from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, Upda
 from .const import (
     DEFAULT_SCAN_INTERVAL,
     DISCRETE_INPUT_COUNT,
+    DISCRETE_INPUT_READ_SEGMENTS,
     DOMAIN,
     INPUT_REGISTER_COUNT,
 )
+from .operating_mode import system_operating_mode_state
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -101,18 +103,22 @@ class EastEA900G4UPSCoordinator(DataUpdateCoordinator[dict[str, Any]]):
                 client = await self._ensure_connected()
                 data: dict[str, Any] = {}
 
-                di_result = await client.read_discrete_inputs(
-                    0,
-                    count=DISCRETE_INPUT_COUNT,
-                    device_id=self.slave_id,
-                )
-                if di_result.isError():
-                    raise UpdateFailed("Failed to read discrete inputs (alarms)")
-
-                raw_bits = di_result.bits
-                if len(raw_bits) < DISCRETE_INPUT_COUNT:
-                    raise UpdateFailed("Discrete input response too short")
-                bits = [bool(raw_bits[i]) for i in range(DISCRETE_INPUT_COUNT)]
+                bits = [False] * DISCRETE_INPUT_COUNT
+                for start, count in DISCRETE_INPUT_READ_SEGMENTS:
+                    di_result = await client.read_discrete_inputs(
+                        start,
+                        count=count,
+                        device_id=self.slave_id,
+                    )
+                    if di_result.isError():
+                        raise UpdateFailed(
+                            f"Failed to read discrete inputs at {start} (alarms)"
+                        )
+                    raw_bits = di_result.bits
+                    if len(raw_bits) < count:
+                        raise UpdateFailed("Discrete input response too short")
+                    for i in range(count):
+                        bits[start + i] = bool(raw_bits[i])
                 data["discrete_inputs"] = bits
 
                 ir_result = await client.read_input_registers(
@@ -150,22 +156,22 @@ class EastEA900G4UPSCoordinator(DataUpdateCoordinator[dict[str, Any]]):
                 data["output_frequency"] = self._scaled_int16(reg[30], 10.0)
                 data["output_power_factor"] = self._scaled_int16(reg[33], 100.0)
 
-                # kVA * 0.1 -> VA
+                # Apparent power: register × 0.1 kVA (per protocol table).
                 s_kva = self._none_if_invalid(reg[36])
                 data["output_apparent_power"] = (
-                    None if s_kva is None else _to_int16(s_kva) * 100.0
+                    None if s_kva is None else _to_int16(s_kva) * 0.1
                 )
 
-                # kW * 0.1 -> W
+                # Active power: register × 0.1 kW.
                 p_kw = self._none_if_invalid(reg[39])
                 data["output_active_power"] = (
-                    None if p_kw is None else _to_int16(p_kw) * 100.0
+                    None if p_kw is None else _to_int16(p_kw) * 0.1
                 )
 
-                # kVAR * 0.1 -> var
+                # Reactive power: register × 0.1 kvar.
                 q_kvar = self._none_if_invalid(reg[42])
                 data["output_reactive_power"] = (
-                    None if q_kvar is None else _to_int16(q_kvar) * 100.0
+                    None if q_kvar is None else _to_int16(q_kvar) * 0.1
                 )
 
                 data["output_load_percent"] = self._scaled_int16(reg[45], 10.0)
@@ -188,7 +194,9 @@ class EastEA900G4UPSCoordinator(DataUpdateCoordinator[dict[str, Any]]):
                 data["status_word"] = None if sw is None else sw
 
                 om = self._none_if_invalid(reg[71])
-                data["system_operating_mode"] = None if om is None else om
+                om_int = None if om is None else int(om)
+                data["system_operating_mode"] = om_int
+                data["system_operating_mode_state"] = system_operating_mode_state(om_int)
 
                 return data
 

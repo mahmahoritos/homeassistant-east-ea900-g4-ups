@@ -25,70 +25,373 @@
   },
   "entity": {
     "sensor": {
-      "bypass_voltage_a": { "name": "Bypass voltage L1" },
-      "bypass_current_a": { "name": "Bypass current L1" },
-      "bypass_frequency": { "name": "Bypass frequency" },
-      "bypass_power_factor": { "name": "Bypass power factor" },
-      "input_voltage_a": { "name": "Input voltage L1" },
-      "input_voltage_b": { "name": "Input voltage L2" },
-      "input_voltage_c": { "name": "Input voltage L3" },
-      "input_current_a": { "name": "Input current L1" },
-      "input_current_b": { "name": "Input current L2" },
-      "input_current_c": { "name": "Input current L3" },
-      "input_frequency": { "name": "Input frequency" },
-      "input_power_factor": { "name": "Input power factor" },
-      "output_voltage_a": { "name": "Output voltage L1" },
-      "output_current_a": { "name": "Output current L1" },
-      "output_frequency": { "name": "Output frequency" },
-      "output_power_factor": { "name": "Output power factor" },
-      "output_apparent_power": { "name": "Output apparent power" },
-      "output_active_power": { "name": "Output active power" },
-      "output_reactive_power": { "name": "Output reactive power" },
-      "output_load_percent": { "name": "Output load" },
-      "battery_voltage": { "name": "Battery voltage" },
-      "battery_current": { "name": "Battery current" },
-      "battery_temperature": { "name": "Battery temperature" },
-      "battery_runtime_remaining": { "name": "Battery runtime remaining" },
-      "battery_capacity": { "name": "Battery capacity" },
-      "inverter_current": { "name": "Inverter current" },
-      "rectifier_temperature": { "name": "Rectifier temperature" },
-      "inverter_temperature": { "name": "Inverter temperature" },
-      "status_word": { "name": "Status word" },
-      "system_operating_mode": { "name": "System operating mode" }
+      "bypass_voltage_a": {
+        "name": "Bypass voltage L1"
+      },
+      "bypass_current_a": {
+        "name": "Bypass current L1"
+      },
+      "bypass_frequency": {
+        "name": "Bypass frequency"
+      },
+      "bypass_power_factor": {
+        "name": "Bypass power factor"
+      },
+      "input_voltage_a": {
+        "name": "Input voltage L1"
+      },
+      "input_voltage_b": {
+        "name": "Input voltage L2"
+      },
+      "input_voltage_c": {
+        "name": "Input voltage L3"
+      },
+      "input_current_a": {
+        "name": "Input current L1"
+      },
+      "input_current_b": {
+        "name": "Input current L2"
+      },
+      "input_current_c": {
+        "name": "Input current L3"
+      },
+      "input_frequency": {
+        "name": "Input frequency"
+      },
+      "input_power_factor": {
+        "name": "Input power factor"
+      },
+      "output_voltage_a": {
+        "name": "Output voltage L1"
+      },
+      "output_current_a": {
+        "name": "Output current L1"
+      },
+      "output_frequency": {
+        "name": "Output frequency"
+      },
+      "output_power_factor": {
+        "name": "Output power factor"
+      },
+      "output_apparent_power": {
+        "name": "Output apparent power (kVA)"
+      },
+      "output_active_power": {
+        "name": "Output active power (kW)"
+      },
+      "output_reactive_power": {
+        "name": "Output reactive power (kvar)"
+      },
+      "output_load_percent": {
+        "name": "Output load"
+      },
+      "battery_voltage": {
+        "name": "Battery voltage"
+      },
+      "battery_current": {
+        "name": "Battery current"
+      },
+      "battery_temperature": {
+        "name": "Battery temperature"
+      },
+      "battery_runtime_remaining": {
+        "name": "Battery runtime remaining"
+      },
+      "battery_capacity": {
+        "name": "Battery capacity"
+      },
+      "inverter_current": {
+        "name": "Inverter current"
+      },
+      "rectifier_temperature": {
+        "name": "Rectifier temperature"
+      },
+      "inverter_temperature": {
+        "name": "Inverter temperature"
+      },
+      "status_word": {
+        "name": "Status word"
+      },
+      "system_operating_mode": {
+        "name": "System operating mode",
+        "state": {
+          "unknown": "Unknown",
+          "bypass_mode": "Bypass mode",
+          "online_mode": "Online mode",
+          "battery_mode": "Battery mode",
+          "mode_0": "Mode 0",
+          "mode_1": "Mode 1",
+          "mode_2": "Mode 2",
+          "mode_5": "Mode 5",
+          "mode_7": "Mode 7",
+          "mode_8": "Mode 8",
+          "mode_9": "Mode 9",
+          "mode_10": "Mode 10",
+          "mode_extended": "Mode above 10"
+        }
+      }
     },
     "binary_sensor": {
-      "bus_high_voltage": { "name": "BUS high voltage" },
-      "overtemperature": { "name": "Overtemperature" },
-      "output_short_circuit": { "name": "Output short circuit" },
-      "overload_fault": { "name": "Overload fault" },
-      "fan_failed": { "name": "Fan failure" },
-      "epo": { "name": "EPO" },
-      "battery_disconnected": { "name": "Battery disconnected" },
-      "input_overcurrent": { "name": "Input overcurrent" },
-      "high_battery_voltage": { "name": "High battery voltage" },
-      "charger_failure": { "name": "Charger failure" },
-      "low_battery_voltage_fault": { "name": "Low battery voltage" },
-      "bypass_fault": { "name": "Bypass fault" },
-      "mains_high_voltage": { "name": "Mains high voltage" },
-      "mains_frequency_abnormal": { "name": "Mains frequency abnormal" },
-      "battery_end_of_discharge": { "name": "Battery end of discharge" },
-      "battery_test_success": { "name": "Battery test successful" },
-      "battery_test_failed": { "name": "Battery test failed" },
-      "mains_abnormality": { "name": "Mains abnormal" },
-      "bypass_abnormality": { "name": "Bypass abnormal" },
-      "overload_alarm": { "name": "Overload alarm" },
-      "inverter_abnormality": { "name": "Inverter abnormal" },
-      "maintain_bypass_enabled": { "name": "Maintenance bypass enabled" },
-      "test_mode": { "name": "Test mode" }
+      "bus_high_voltage": {
+        "name": "BUS high voltage"
+      },
+      "bus_low_voltage": {
+        "name": "BUS low voltage"
+      },
+      "bus_unbalanced": {
+        "name": "BUS unbalanced"
+      },
+      "bus_soft_start_failure": {
+        "name": "BUS soft start failure"
+      },
+      "inverter_soft_start_failure": {
+        "name": "Inverter soft start failure"
+      },
+      "inverter_high_voltage": {
+        "name": "Inverter high voltage"
+      },
+      "inverter_low_voltage": {
+        "name": "Inverter low voltage"
+      },
+      "inverter_prohibited": {
+        "name": "Inverter prohibited"
+      },
+      "overtemperature": {
+        "name": "Overtemperature"
+      },
+      "output_short_circuit": {
+        "name": "Output short circuit"
+      },
+      "overload_fault": {
+        "name": "Overload fault"
+      },
+      "negative_power_abnormality": {
+        "name": "Negative power abnormality"
+      },
+      "shutdown_fault": {
+        "name": "Shutdown fault"
+      },
+      "parallel_ups_software_mismatch": {
+        "name": "Parallel UPS software version mismatch"
+      },
+      "sync_signal_abnormality_unused": {
+        "name": "Sync signal abnormality (unused)"
+      },
+      "sync_pulse_abnormality": {
+        "name": "Sync pulse abnormality"
+      },
+      "inverter_relay_adhesion": {
+        "name": "Inverter relay adhesion"
+      },
+      "bus_short_circuit": {
+        "name": "BUS short circuit"
+      },
+      "can_communication_abnormality": {
+        "name": "CAN communication abnormality"
+      },
+      "physical_address_conflict": {
+        "name": "Physical address conflict"
+      },
+      "parallel_ups_model_incompatible": {
+        "name": "Parallel UPS model incompatible"
+      },
+      "wrong_battery_numbers": {
+        "name": "Wrong battery numbers"
+      },
+      "input_scr_soft_start_failure": {
+        "name": "Input SCR soft start failure"
+      },
+      "rectifier_scr_fault_unused": {
+        "name": "Rectifier SCR fault (unused)"
+      },
+      "inverter_abnormality": {
+        "name": "Inverter abnormality"
+      },
+      "incorrect_parallel_bypass_wiring": {
+        "name": "Incorrect parallel bypass wiring"
+      },
+      "inverter_open_circuit": {
+        "name": "Inverter open circuit"
+      },
+      "pfc_abnormality": {
+        "name": "PFC abnormality"
+      },
+      "inverter_capacitor_abnormality": {
+        "name": "Inverter capacitor abnormality"
+      },
+      "fan_failed": {
+        "name": "Fan failure"
+      },
+      "epo": {
+        "name": "EPO"
+      },
+      "auxiliary_power_lost": {
+        "name": "Auxiliary power lost"
+      },
+      "parallel_cables_abnormal": {
+        "name": "Parallel cables connection abnormal"
+      },
+      "parallel_ups_settings_error": {
+        "name": "Parallel UPS settings error"
+      },
+      "reversed_battery_connection": {
+        "name": "Reversed battery connection"
+      },
+      "overload_alarm": {
+        "name": "Overload alarm"
+      },
+      "battery_disconnected": {
+        "name": "Battery disconnected"
+      },
+      "input_overcurrent": {
+        "name": "Input overcurrent"
+      },
+      "high_battery_voltage": {
+        "name": "High battery voltage"
+      },
+      "startup_abnormality": {
+        "name": "Startup abnormality"
+      },
+      "charger_failure": {
+        "name": "Charger failure"
+      },
+      "eeprom_abnormality": {
+        "name": "EEPROM abnormality"
+      },
+      "input_overcurrent_overtime": {
+        "name": "Input overcurrent overtime"
+      },
+      "low_battery_voltage_fault": {
+        "name": "Low battery voltage"
+      },
+      "ad_sampling_abnormality": {
+        "name": "AD sampling abnormality"
+      },
+      "sync_pulse_abnormality_2": {
+        "name": "Sync pulse abnormality"
+      },
+      "sync_signal_abnormality_2": {
+        "name": "Sync signal abnormality"
+      },
+      "can_communication_abnormality_2": {
+        "name": "CAN communication abnormality"
+      },
+      "high_bypass_voltage": {
+        "name": "High bypass voltage"
+      },
+      "bypass_fault": {
+        "name": "Bypass fault"
+      },
+      "mains_high_voltage": {
+        "name": "Mains high voltage"
+      },
+      "mains_frequency_abnormal": {
+        "name": "Mains frequency abnormal"
+      },
+      "bypass_frequency_out_of_tracking": {
+        "name": "Bypass frequency out of tracking"
+      },
+      "bypass_to_inverter_switching_limited": {
+        "name": "Bypass to inverter switching limited"
+      },
+      "battery_end_of_discharge": {
+        "name": "Battery end of discharge"
+      },
+      "battery_test_success": {
+        "name": "Battery test successful"
+      },
+      "power_on_prohibited": {
+        "name": "Power-on prohibited"
+      },
+      "battery_test_failed": {
+        "name": "Battery test failed"
+      },
+      "parallel_current_sharing_abnormality": {
+        "name": "Parallel current sharing abnormality"
+      },
+      "inverter_phase_lock_abnormality": {
+        "name": "Inverter phase lock abnormality"
+      },
+      "battery_maintenance_success": {
+        "name": "Battery maintenance successful"
+      },
+      "battery_maintenance_abnormality": {
+        "name": "Battery maintenance abnormality"
+      },
+      "input_current_unbalanced": {
+        "name": "Input current unbalanced"
+      },
+      "pfc_abnormality_2": {
+        "name": "PFC abnormality"
+      },
+      "bus_low_to_battery_switching_limited": {
+        "name": "BUS low to battery switching limited"
+      },
+      "mains_abnormality": {
+        "name": "Mains abnormal"
+      },
+      "bypass_abnormality": {
+        "name": "Bypass abnormal"
+      },
+      "bypass_frequency_abnormality": {
+        "name": "Bypass frequency abnormal"
+      },
+      "inconsistent_inverter_output_voltage_detection": {
+        "name": "Inconsistent inverter output voltage detection"
+      },
+      "battery_voltage_abnormality": {
+        "name": "Battery voltage abnormality"
+      },
+      "inconsistent_bypass_output_voltage_detection": {
+        "name": "Inconsistent bypass output voltage detection"
+      },
+      "instable_load_unused": {
+        "name": "Unstable load (unused)"
+      },
+      "maintain_bypass_enabled": {
+        "name": "Maintenance bypass enabled"
+      },
+      "frequent_overtemperature": {
+        "name": "Frequent overtemperature"
+      },
+      "parallel_battery_count_inconsistent": {
+        "name": "Parallel battery count inconsistent"
+      },
+      "battery_temp_compensation_abnormal_unused": {
+        "name": "Battery temperature compensation abnormal (unused)"
+      },
+      "instable_bypass_voltage_unused": {
+        "name": "Unstable bypass voltage (unused)"
+      },
+      "test_mode": {
+        "name": "Test mode"
+      },
+      "overload_frequently": {
+        "name": "Overload frequently"
+      }
     },
     "button": {
-      "clear_fault": { "name": "Clear fault" },
-      "buzzer_silence": { "name": "Silence buzzer" },
-      "manual_switch_bypass": { "name": "Manual switch to bypass" },
-      "manual_switch_inverter": { "name": "Manual switch to inverter" },
-      "battery_test_20s": { "name": "Battery test (20 s discharge)" },
-      "battery_maintenance": { "name": "Battery maintenance discharge" },
-      "stop_battery_test": { "name": "Stop battery test" }
+      "clear_fault": {
+        "name": "Clear fault"
+      },
+      "buzzer_silence": {
+        "name": "Silence buzzer"
+      },
+      "manual_switch_bypass": {
+        "name": "Manual switch to bypass"
+      },
+      "manual_switch_inverter": {
+        "name": "Manual switch to inverter"
+      },
+      "battery_test_20s": {
+        "name": "Battery test (20 s discharge)"
+      },
+      "battery_maintenance": {
+        "name": "Battery maintenance discharge"
+      },
+      "stop_battery_test": {
+        "name": "Stop battery test"
+      }
     }
   }
 }

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import Any
 
 from homeassistant.components.binary_sensor import (
     BinarySensorDeviceClass,
@@ -16,6 +17,16 @@ from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import DOMAIN
 from .coordinator import EastEA900G4UPSCoordinator
+from .discrete_bits import DISCRETE_BIT_SPECS
+
+_DC: dict[str, BinarySensorDeviceClass] = {
+    "problem": BinarySensorDeviceClass.PROBLEM,
+    "heat": BinarySensorDeviceClass.HEAT,
+    "battery": BinarySensorDeviceClass.BATTERY,
+    "safety": BinarySensorDeviceClass.SAFETY,
+    "running": BinarySensorDeviceClass.RUNNING,
+    "connectivity": BinarySensorDeviceClass.CONNECTIVITY,
+}
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -25,166 +36,24 @@ class EastUPSBinarySensorEntityDescription(BinarySensorEntityDescription):
     bit_index: int
 
 
-# Bit indices per EA900 G4 Modbus protocol (remote signalling table, FC 0x02).
+def _build_descriptions() -> tuple[EastUPSBinarySensorEntityDescription, ...]:
+    """Create one entity description per discrete input bit (0–95)."""
+    out: list[EastUPSBinarySensorEntityDescription] = []
+    for bit, tkey, enabled_default, dc_hint in DISCRETE_BIT_SPECS:
+        kwargs: dict[str, Any] = {
+            "key": tkey,
+            "translation_key": tkey,
+            "bit_index": bit,
+            "entity_registry_enabled_default": enabled_default,
+        }
+        if dc_hint is not None:
+            kwargs["device_class"] = _DC[dc_hint]
+        out.append(EastUPSBinarySensorEntityDescription(**kwargs))
+    return tuple(out)
+
+
 BINARY_SENSOR_DESCRIPTIONS: tuple[EastUPSBinarySensorEntityDescription, ...] = (
-    EastUPSBinarySensorEntityDescription(
-        key="bus_high_voltage",
-        translation_key="bus_high_voltage",
-        device_class=BinarySensorDeviceClass.PROBLEM,
-        bit_index=0,
-        entity_registry_enabled_default=False,
-    ),
-    EastUPSBinarySensorEntityDescription(
-        key="overtemperature",
-        translation_key="overtemperature",
-        device_class=BinarySensorDeviceClass.HEAT,
-        bit_index=8,
-    ),
-    EastUPSBinarySensorEntityDescription(
-        key="output_short_circuit",
-        translation_key="output_short_circuit",
-        device_class=BinarySensorDeviceClass.PROBLEM,
-        bit_index=9,
-    ),
-    EastUPSBinarySensorEntityDescription(
-        key="overload_fault",
-        translation_key="overload_fault",
-        device_class=BinarySensorDeviceClass.PROBLEM,
-        bit_index=10,
-        icon="mdi:flash-alert",
-    ),
-    EastUPSBinarySensorEntityDescription(
-        key="fan_failed",
-        translation_key="fan_failed",
-        device_class=BinarySensorDeviceClass.PROBLEM,
-        bit_index=29,
-        icon="mdi:fan-alert",
-    ),
-    EastUPSBinarySensorEntityDescription(
-        key="epo",
-        translation_key="epo",
-        device_class=BinarySensorDeviceClass.SAFETY,
-        bit_index=30,
-        icon="mdi:stop-circle",
-    ),
-    EastUPSBinarySensorEntityDescription(
-        key="battery_disconnected",
-        translation_key="battery_disconnected",
-        device_class=BinarySensorDeviceClass.PROBLEM,
-        bit_index=52,
-        icon="mdi:battery-off",
-    ),
-    EastUPSBinarySensorEntityDescription(
-        key="input_overcurrent",
-        translation_key="input_overcurrent",
-        device_class=BinarySensorDeviceClass.PROBLEM,
-        bit_index=53,
-        entity_registry_enabled_default=False,
-    ),
-    EastUPSBinarySensorEntityDescription(
-        key="high_battery_voltage",
-        translation_key="high_battery_voltage",
-        device_class=BinarySensorDeviceClass.PROBLEM,
-        bit_index=54,
-        entity_registry_enabled_default=False,
-    ),
-    EastUPSBinarySensorEntityDescription(
-        key="charger_failure",
-        translation_key="charger_failure",
-        device_class=BinarySensorDeviceClass.PROBLEM,
-        bit_index=56,
-        icon="mdi:battery-charging-wireless-alert",
-    ),
-    EastUPSBinarySensorEntityDescription(
-        key="low_battery_voltage_fault",
-        translation_key="low_battery_voltage_fault",
-        device_class=BinarySensorDeviceClass.BATTERY,
-        bit_index=59,
-    ),
-    EastUPSBinarySensorEntityDescription(
-        key="bypass_fault",
-        translation_key="bypass_fault",
-        device_class=BinarySensorDeviceClass.PROBLEM,
-        bit_index=65,
-        icon="mdi:swap-horizontal",
-    ),
-    EastUPSBinarySensorEntityDescription(
-        key="mains_high_voltage",
-        translation_key="mains_high_voltage",
-        device_class=BinarySensorDeviceClass.PROBLEM,
-        bit_index=66,
-        entity_registry_enabled_default=False,
-    ),
-    EastUPSBinarySensorEntityDescription(
-        key="mains_frequency_abnormal",
-        translation_key="mains_frequency_abnormal",
-        device_class=BinarySensorDeviceClass.PROBLEM,
-        bit_index=67,
-        entity_registry_enabled_default=False,
-    ),
-    EastUPSBinarySensorEntityDescription(
-        key="battery_end_of_discharge",
-        translation_key="battery_end_of_discharge",
-        device_class=BinarySensorDeviceClass.BATTERY,
-        bit_index=70,
-        icon="mdi:battery-alert",
-    ),
-    EastUPSBinarySensorEntityDescription(
-        key="battery_test_success",
-        translation_key="battery_test_success",
-        bit_index=71,
-        icon="mdi:check-circle",
-        entity_registry_enabled_default=False,
-    ),
-    EastUPSBinarySensorEntityDescription(
-        key="battery_test_failed",
-        translation_key="battery_test_failed",
-        device_class=BinarySensorDeviceClass.PROBLEM,
-        bit_index=73,
-        icon="mdi:close-circle",
-    ),
-    EastUPSBinarySensorEntityDescription(
-        key="mains_abnormality",
-        translation_key="mains_abnormality",
-        device_class=BinarySensorDeviceClass.PROBLEM,
-        bit_index=82,
-        icon="mdi:transmission-tower-off",
-    ),
-    EastUPSBinarySensorEntityDescription(
-        key="bypass_abnormality",
-        translation_key="bypass_abnormality",
-        device_class=BinarySensorDeviceClass.PROBLEM,
-        bit_index=83,
-        entity_registry_enabled_default=False,
-    ),
-    EastUPSBinarySensorEntityDescription(
-        key="overload_alarm",
-        translation_key="overload_alarm",
-        device_class=BinarySensorDeviceClass.PROBLEM,
-        bit_index=51,
-        icon="mdi:flash-alert-outline",
-    ),
-    EastUPSBinarySensorEntityDescription(
-        key="inverter_abnormality",
-        translation_key="inverter_abnormality",
-        device_class=BinarySensorDeviceClass.PROBLEM,
-        bit_index=24,
-        entity_registry_enabled_default=False,
-    ),
-    EastUPSBinarySensorEntityDescription(
-        key="maintain_bypass_enabled",
-        translation_key="maintain_bypass_enabled",
-        device_class=BinarySensorDeviceClass.RUNNING,
-        bit_index=89,
-        entity_registry_enabled_default=False,
-    ),
-    EastUPSBinarySensorEntityDescription(
-        key="test_mode",
-        translation_key="test_mode",
-        device_class=BinarySensorDeviceClass.RUNNING,
-        bit_index=94,
-        icon="mdi:test-tube",
-    ),
+    _build_descriptions()
 )
 
 

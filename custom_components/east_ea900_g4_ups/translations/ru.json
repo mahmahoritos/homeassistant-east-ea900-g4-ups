@@ -25,70 +25,373 @@
   },
   "entity": {
     "sensor": {
-      "bypass_voltage_a": { "name": "Напряжение байпаса L1" },
-      "bypass_current_a": { "name": "Ток байпаса L1" },
-      "bypass_frequency": { "name": "Частота байпаса" },
-      "bypass_power_factor": { "name": "Коэффициент мощности байпаса" },
-      "input_voltage_a": { "name": "Входное напряжение L1" },
-      "input_voltage_b": { "name": "Входное напряжение L2" },
-      "input_voltage_c": { "name": "Входное напряжение L3" },
-      "input_current_a": { "name": "Входной ток L1" },
-      "input_current_b": { "name": "Входной ток L2" },
-      "input_current_c": { "name": "Входной ток L3" },
-      "input_frequency": { "name": "Входная частота" },
-      "input_power_factor": { "name": "Коэффициент мощности на входе" },
-      "output_voltage_a": { "name": "Выходное напряжение L1" },
-      "output_current_a": { "name": "Выходной ток L1" },
-      "output_frequency": { "name": "Выходная частота" },
-      "output_power_factor": { "name": "Коэффициент мощности на выходе" },
-      "output_apparent_power": { "name": "Полная мощность на выходе" },
-      "output_active_power": { "name": "Активная мощность на выходе" },
-      "output_reactive_power": { "name": "Реактивная мощность на выходе" },
-      "output_load_percent": { "name": "Загрузка на выходе" },
-      "battery_voltage": { "name": "Напряжение АКБ" },
-      "battery_current": { "name": "Ток АКБ" },
-      "battery_temperature": { "name": "Температура АКБ" },
-      "battery_runtime_remaining": { "name": "Оставшееся время автономии" },
-      "battery_capacity": { "name": "Ёмкость АКБ" },
-      "inverter_current": { "name": "Ток инвертора" },
-      "rectifier_temperature": { "name": "Температура выпрямителя" },
-      "inverter_temperature": { "name": "Температура инвертора" },
-      "status_word": { "name": "Слово состояния" },
-      "system_operating_mode": { "name": "Режим работы системы" }
+      "bypass_voltage_a": {
+        "name": "Напряжение байпаса L1"
+      },
+      "bypass_current_a": {
+        "name": "Ток байпаса L1"
+      },
+      "bypass_frequency": {
+        "name": "Частота байпаса"
+      },
+      "bypass_power_factor": {
+        "name": "Коэффициент мощности байпаса"
+      },
+      "input_voltage_a": {
+        "name": "Входное напряжение L1"
+      },
+      "input_voltage_b": {
+        "name": "Входное напряжение L2"
+      },
+      "input_voltage_c": {
+        "name": "Входное напряжение L3"
+      },
+      "input_current_a": {
+        "name": "Входной ток L1"
+      },
+      "input_current_b": {
+        "name": "Входной ток L2"
+      },
+      "input_current_c": {
+        "name": "Входной ток L3"
+      },
+      "input_frequency": {
+        "name": "Входная частота"
+      },
+      "input_power_factor": {
+        "name": "Коэффициент мощности на входе"
+      },
+      "output_voltage_a": {
+        "name": "Выходное напряжение L1"
+      },
+      "output_current_a": {
+        "name": "Выходной ток L1"
+      },
+      "output_frequency": {
+        "name": "Выходная частота"
+      },
+      "output_power_factor": {
+        "name": "Коэффициент мощности на выходе"
+      },
+      "output_apparent_power": {
+        "name": "Полная мощность на выходе (кВА)"
+      },
+      "output_active_power": {
+        "name": "Активная мощность на выходе (кВт)"
+      },
+      "output_reactive_power": {
+        "name": "Реактивная мощность на выходе (квар)"
+      },
+      "output_load_percent": {
+        "name": "Загрузка на выходе"
+      },
+      "battery_voltage": {
+        "name": "Напряжение АКБ"
+      },
+      "battery_current": {
+        "name": "Ток АКБ"
+      },
+      "battery_temperature": {
+        "name": "Температура АКБ"
+      },
+      "battery_runtime_remaining": {
+        "name": "Оставшееся время автономии"
+      },
+      "battery_capacity": {
+        "name": "Ёмкость АКБ"
+      },
+      "inverter_current": {
+        "name": "Ток инвертора"
+      },
+      "rectifier_temperature": {
+        "name": "Температура выпрямителя"
+      },
+      "inverter_temperature": {
+        "name": "Температура инвертора"
+      },
+      "status_word": {
+        "name": "Слово состояния"
+      },
+      "system_operating_mode": {
+        "name": "Режим работы системы",
+        "state": {
+          "unknown": "Неизвестно",
+          "bypass_mode": "Режим байпаса",
+          "online_mode": "Нормальный режим",
+          "battery_mode": "Режим работы от батарей",
+          "mode_0": "Режим 0",
+          "mode_1": "Режим 1",
+          "mode_2": "Режим 2",
+          "mode_5": "Режим 5",
+          "mode_7": "Режим 7",
+          "mode_8": "Режим 8",
+          "mode_9": "Режим 9",
+          "mode_10": "Режим 10",
+          "mode_extended": "Режим выше 10"
+        }
+      }
     },
     "binary_sensor": {
-      "bus_high_voltage": { "name": "Повышенное напряжение шины" },
-      "overtemperature": { "name": "Перегрев" },
-      "output_short_circuit": { "name": "Короткое замыкание на выходе" },
-      "overload_fault": { "name": "Авария перегрузки" },
-      "fan_failed": { "name": "Отказ вентилятора" },
-      "epo": { "name": "Аварийное отключение (EPO)" },
-      "battery_disconnected": { "name": "АКБ отключена" },
-      "input_overcurrent": { "name": "Перегрузка по входному току" },
-      "high_battery_voltage": { "name": "Повышенное напряжение АКБ" },
-      "charger_failure": { "name": "Неисправность зарядного устройства" },
-      "low_battery_voltage_fault": { "name": "Низкое напряжение АКБ" },
-      "bypass_fault": { "name": "Неисправность байпаса" },
-      "mains_high_voltage": { "name": "Повышенное напряжение сети" },
-      "mains_frequency_abnormal": { "name": "Аномальная частота сети" },
-      "battery_end_of_discharge": { "name": "Разряд АКБ (конец разряда)" },
-      "battery_test_success": { "name": "Тест АКБ успешен" },
-      "battery_test_failed": { "name": "Тест АКБ не пройден" },
-      "mains_abnormality": { "name": "Аномалия сети" },
-      "bypass_abnormality": { "name": "Аномалия байпаса" },
-      "overload_alarm": { "name": "Предупреждение перегрузки" },
-      "inverter_abnormality": { "name": "Аномалия инвертора" },
-      "maintain_bypass_enabled": { "name": "Включён обслуживающий байпас" },
-      "test_mode": { "name": "Режим теста" }
+      "bus_high_voltage": {
+        "name": "╨Я╨╛╨▓╤Л╤И╨╡╨╜╨╜╨╛╨╡ ╨╜╨░╨┐╤А╤П╨╢╨╡╨╜╨╕╨╡ ╤И╨╕╨╜╤Л (BUS)"
+      },
+      "bus_low_voltage": {
+        "name": "╨Я╨╛╨╜╨╕╨╢╨╡╨╜╨╜╨╛╨╡ ╨╜╨░╨┐╤А╤П╨╢╨╡╨╜╨╕╨╡ ╤И╨╕╨╜╤Л (BUS)"
+      },
+      "bus_unbalanced": {
+        "name": "╨Ф╨╕╤Б╨▒╨░╨╗╨░╨╜╤Б ╤И╨╕╨╜╤Л (BUS)"
+      },
+      "bus_soft_start_failure": {
+        "name": "╨б╨▒╨╛╨╣ ╨┐╨╗╨░╨▓╨╜╨╛╨│╨╛ ╨┐╤Г╤Б╨║╨░ ╤И╨╕╨╜╤Л (BUS)"
+      },
+      "inverter_soft_start_failure": {
+        "name": "╨б╨▒╨╛╨╣ ╨┐╨╗╨░╨▓╨╜╨╛╨│╨╛ ╨┐╤Г╤Б╨║╨░ ╨╕╨╜╨▓╨╡╤А╤В╨╛╤А╨░"
+      },
+      "inverter_high_voltage": {
+        "name": "╨Я╨╛╨▓╤Л╤И╨╡╨╜╨╜╨╛╨╡ ╨╜╨░╨┐╤А╤П╨╢╨╡╨╜╨╕╨╡ ╨╕╨╜╨▓╨╡╤А╤В╨╛╤А╨░"
+      },
+      "inverter_low_voltage": {
+        "name": "╨Я╨╛╨╜╨╕╨╢╨╡╨╜╨╜╨╛╨╡ ╨╜╨░╨┐╤А╤П╨╢╨╡╨╜╨╕╨╡ ╨╕╨╜╨▓╨╡╤А╤В╨╛╤А╨░"
+      },
+      "inverter_prohibited": {
+        "name": "╨Ш╨╜╨▓╨╡╤А╤В╨╛╤А ╨╖╨░╨┐╤А╨╡╤Й╤С╨╜"
+      },
+      "overtemperature": {
+        "name": "╨Я╨╡╤А╨╡╨│╤А╨╡╨▓"
+      },
+      "output_short_circuit": {
+        "name": "╨Ъ╨╛╤А╨╛╤В╨║╨╛╨╡ ╨╖╨░╨╝╤Л╨║╨░╨╜╨╕╨╡ ╨╜╨░ ╨▓╤Л╤Е╨╛╨┤╨╡"
+      },
+      "overload_fault": {
+        "name": "╨Р╨▓╨░╤А╨╕╤П ╨┐╨╡╤А╨╡╨│╤А╤Г╨╖╨║╨╕"
+      },
+      "negative_power_abnormality": {
+        "name": "╨Р╨╜╨╛╨╝╨░╨╗╨╕╤П ╨╛╨▒╤А╨░╤В╨╜╨╛╨╣ ╨╝╨╛╤Й╨╜╨╛╤Б╤В╨╕"
+      },
+      "shutdown_fault": {
+        "name": "╨Р╨▓╨░╤А╨╕╤П ╨┐╤А╨╕ ╨╛╤В╨║╨╗╤О╤З╨╡╨╜╨╕╨╕"
+      },
+      "parallel_ups_software_mismatch": {
+        "name": "╨Э╨╡╤Б╨╛╨▓╨┐╨░╨┤╨╡╨╜╨╕╨╡ ╨▓╨╡╤А╤Б╨╕╨╣ ╨Я╨Ю ╨┐╨░╤А╨░╨╗╨╗╨╡╨╗╤М╨╜╤Л╤Е ╨Ш╨С╨Я"
+      },
+      "sync_signal_abnormality_unused": {
+        "name": "╨Р╨╜╨╛╨╝╨░╨╗╨╕╤П ╤Б╨╕╨│╨╜╨░╨╗╨░ ╤Б╨╕╨╜╤Е╤А╨╛╨╜╨╕╨╖╨░╤Ж╨╕╨╕ (╨╜╨╡ ╨╕╤Б╨┐╨╛╨╗╤М╨╖╤Г╨╡╤В╤Б╤П)"
+      },
+      "sync_pulse_abnormality": {
+        "name": "╨Р╨╜╨╛╨╝╨░╨╗╨╕╤П ╨╕╨╝╨┐╤Г╨╗╤М╤Б╨░ ╤Б╨╕╨╜╤Е╤А╨╛╨╜╨╕╨╖╨░╤Ж╨╕╨╕"
+      },
+      "inverter_relay_adhesion": {
+        "name": "╨Ч╨░╨╗╨╕╨┐╨░╨╜╨╕╨╡ ╤А╨╡╨╗╨╡ ╨╕╨╜╨▓╨╡╤А╤В╨╛╤А╨░"
+      },
+      "bus_short_circuit": {
+        "name": "╨Ъ╨╛╤А╨╛╤В╨║╨╛╨╡ ╨╖╨░╨╝╤Л╨║╨░╨╜╨╕╨╡ ╤И╨╕╨╜╤Л (BUS)"
+      },
+      "can_communication_abnormality": {
+        "name": "╨Р╨╜╨╛╨╝╨░╨╗╨╕╤П ╤Б╨▓╤П╨╖╨╕ CAN"
+      },
+      "physical_address_conflict": {
+        "name": "╨Ъ╨╛╨╜╤Д╨╗╨╕╨║╤В ╤Д╨╕╨╖╨╕╤З╨╡╤Б╨║╨╛╨│╨╛ ╨░╨┤╤А╨╡╤Б╨░"
+      },
+      "parallel_ups_model_incompatible": {
+        "name": "╨Э╨╡╤Б╨╛╨▓╨╝╨╡╤Б╤В╨╕╨╝╨╛╤Б╤В╤М ╨╝╨╛╨┤╨╡╨╗╨╡╨╣ ╨┐╨░╤А╨░╨╗╨╗╨╡╨╗╤М╨╜╤Л╤Е ╨Ш╨С╨Я"
+      },
+      "wrong_battery_numbers": {
+        "name": "╨Э╨╡╨▓╨╡╤А╨╜╨╛╨╡ ╨║╨╛╨╗╨╕╤З╨╡╤Б╤В╨▓╨╛ ╨Р╨Ъ╨С"
+      },
+      "input_scr_soft_start_failure": {
+        "name": "╨б╨▒╨╛╨╣ ╨┐╨╗╨░╨▓╨╜╨╛╨│╨╛ ╨┐╤Г╤Б╨║╨░ ╨▓╤Е╨╛╨┤╨╜╨╛╨│╨╛ SCR"
+      },
+      "rectifier_scr_fault_unused": {
+        "name": "╨Э╨╡╨╕╤Б╨┐╤А╨░╨▓╨╜╨╛╤Б╤В╤М SCR ╨▓╤Л╨┐╤А╤П╨╝╨╕╤В╨╡╨╗╤П (╨╜╨╡ ╨╕╤Б╨┐╨╛╨╗╤М╨╖╤Г╨╡╤В╤Б╤П)"
+      },
+      "inverter_abnormality": {
+        "name": "╨Р╨╜╨╛╨╝╨░╨╗╨╕╤П ╨╕╨╜╨▓╨╡╤А╤В╨╛╤А╨░"
+      },
+      "incorrect_parallel_bypass_wiring": {
+        "name": "╨Э╨╡╨▓╨╡╤А╨╜╨░╤П ╤А╨░╨╖╨▓╨╛╨┤╨║╨░ ╨▒╨░╨╣╨┐╨░╤Б╨░ ╨┐╨░╤А╨░╨╗╨╗╨╡╨╗╤М╨╜╤Л╤Е ╨Ш╨С╨Я"
+      },
+      "inverter_open_circuit": {
+        "name": "╨Ю╨▒╤А╤Л╨▓ ╤Ж╨╡╨┐╨╕ ╨╕╨╜╨▓╨╡╤А╤В╨╛╤А╨░"
+      },
+      "pfc_abnormality": {
+        "name": "╨Р╨╜╨╛╨╝╨░╨╗╨╕╤П PFC"
+      },
+      "inverter_capacitor_abnormality": {
+        "name": "╨Р╨╜╨╛╨╝╨░╨╗╨╕╤П ╨║╨╛╨╜╨┤╨╡╨╜╤Б╨░╤В╨╛╤А╨╛╨▓ ╨╕╨╜╨▓╨╡╤А╤В╨╛╤А╨░"
+      },
+      "fan_failed": {
+        "name": "╨Ю╤В╨║╨░╨╖ ╨▓╨╡╨╜╤В╨╕╨╗╤П╤В╨╛╤А╨░"
+      },
+      "epo": {
+        "name": "╨Р╨▓╨░╤А╨╕╨╣╨╜╨╛╨╡ ╨╛╤В╨║╨╗╤О╤З╨╡╨╜╨╕╨╡ (EPO)"
+      },
+      "auxiliary_power_lost": {
+        "name": "╨Я╨╛╤В╨╡╤А╤П ╨▓╤Б╨┐╨╛╨╝╨╛╨│╨░╤В╨╡╨╗╤М╨╜╨╛╨│╨╛ ╨┐╨╕╤В╨░╨╜╨╕╤П"
+      },
+      "parallel_cables_abnormal": {
+        "name": "╨Р╨╜╨╛╨╝╨░╨╗╨╕╤П ╤Б╨╛╨╡╨┤╨╕╨╜╨╡╨╜╨╕╤П ╨┐╨░╤А╨░╨╗╨╗╨╡╨╗╤М╨╜╤Л╤Е ╨║╨░╨▒╨╡╨╗╨╡╨╣"
+      },
+      "parallel_ups_settings_error": {
+        "name": "╨Ю╤И╨╕╨▒╨║╨░ ╨╜╨░╤Б╤В╤А╨╛╨╡╨║ ╨┐╨░╤А╨░╨╗╨╗╨╡╨╗╤М╨╜╤Л╤Е ╨Ш╨С╨Я"
+      },
+      "reversed_battery_connection": {
+        "name": "╨Ю╨▒╤А╨░╤В╨╜╨╛╨╡ ╨┐╨╛╨┤╨║╨╗╤О╤З╨╡╨╜╨╕╨╡ ╨Р╨Ъ╨С"
+      },
+      "overload_alarm": {
+        "name": "╨Я╤А╨╡╨┤╤Г╨┐╤А╨╡╨╢╨┤╨╡╨╜╨╕╨╡ ╨┐╨╡╤А╨╡╨│╤А╤Г╨╖╨║╨╕"
+      },
+      "battery_disconnected": {
+        "name": "╨Р╨Ъ╨С ╨╛╤В╨║╨╗╤О╤З╨╡╨╜╨░"
+      },
+      "input_overcurrent": {
+        "name": "╨Я╨╡╤А╨╡╨│╤А╤Г╨╖╨║╨░ ╨┐╨╛ ╨▓╤Е╨╛╨┤╨╜╨╛╨╝╤Г ╤В╨╛╨║╤Г"
+      },
+      "high_battery_voltage": {
+        "name": "╨Я╨╛╨▓╤Л╤И╨╡╨╜╨╜╨╛╨╡ ╨╜╨░╨┐╤А╤П╨╢╨╡╨╜╨╕╨╡ ╨Р╨Ъ╨С"
+      },
+      "startup_abnormality": {
+        "name": "╨Р╨╜╨╛╨╝╨░╨╗╨╕╤П ╨┐╤Г╤Б╨║╨░"
+      },
+      "charger_failure": {
+        "name": "╨Э╨╡╨╕╤Б╨┐╤А╨░╨▓╨╜╨╛╤Б╤В╤М ╨╖╨░╤А╤П╨┤╨╜╨╛╨│╨╛ ╤Г╤Б╤В╤А╨╛╨╣╤Б╤В╨▓╨░"
+      },
+      "eeprom_abnormality": {
+        "name": "╨Р╨╜╨╛╨╝╨░╨╗╨╕╤П EEPROM"
+      },
+      "input_overcurrent_overtime": {
+        "name": "╨Я╨╡╤А╨╡╨│╤А╤Г╨╖╨║╨░ ╨┐╨╛ ╨▓╤Е╨╛╨┤╨╜╨╛╨╝╤Г ╤В╨╛╨║╤Г (╨▓╤А╨╡╨╝╤П)"
+      },
+      "low_battery_voltage_fault": {
+        "name": "╨Э╨╕╨╖╨║╨╛╨╡ ╨╜╨░╨┐╤А╤П╨╢╨╡╨╜╨╕╨╡ ╨Р╨Ъ╨С"
+      },
+      "ad_sampling_abnormality": {
+        "name": "╨Р╨╜╨╛╨╝╨░╨╗╨╕╤П ╨Р╨ж╨Я"
+      },
+      "sync_pulse_abnormality_2": {
+        "name": "╨Р╨╜╨╛╨╝╨░╨╗╨╕╤П ╨╕╨╝╨┐╤Г╨╗╤М╤Б╨░ ╤Б╨╕╨╜╤Е╤А╨╛╨╜╨╕╨╖╨░╤Ж╨╕╨╕ (2)"
+      },
+      "sync_signal_abnormality_2": {
+        "name": "╨Р╨╜╨╛╨╝╨░╨╗╨╕╤П ╤Б╨╕╨│╨╜╨░╨╗╨░ ╤Б╨╕╨╜╤Е╤А╨╛╨╜╨╕╨╖╨░╤Ж╨╕╨╕ (2)"
+      },
+      "can_communication_abnormality_2": {
+        "name": "╨Р╨╜╨╛╨╝╨░╨╗╨╕╤П ╤Б╨▓╤П╨╖╨╕ CAN (2)"
+      },
+      "high_bypass_voltage": {
+        "name": "╨Я╨╛╨▓╤Л╤И╨╡╨╜╨╜╨╛╨╡ ╨╜╨░╨┐╤А╤П╨╢╨╡╨╜╨╕╨╡ ╨▒╨░╨╣╨┐╨░╤Б╨░"
+      },
+      "bypass_fault": {
+        "name": "╨Э╨╡╨╕╤Б╨┐╤А╨░╨▓╨╜╨╛╤Б╤В╤М ╨▒╨░╨╣╨┐╨░╤Б╨░"
+      },
+      "mains_high_voltage": {
+        "name": "╨Я╨╛╨▓╤Л╤И╨╡╨╜╨╜╨╛╨╡ ╨╜╨░╨┐╤А╤П╨╢╨╡╨╜╨╕╨╡ ╤Б╨╡╤В╨╕"
+      },
+      "mains_frequency_abnormal": {
+        "name": "╨Р╨╜╨╛╨╝╨░╨╗╤М╨╜╨░╤П ╤З╨░╤Б╤В╨╛╤В╨░ ╤Б╨╡╤В╨╕"
+      },
+      "bypass_frequency_out_of_tracking": {
+        "name": "╨з╨░╤Б╤В╨╛╤В╨░ ╨▒╨░╨╣╨┐╨░╤Б╨░ ╨▓╨╜╨╡ ╤Б╨╗╨╡╨╢╨╡╨╜╨╕╤П"
+      },
+      "bypass_to_inverter_switching_limited": {
+        "name": "╨Ю╨│╤А╨░╨╜╨╕╤З╨╡╨╜╨╕╨╡ ╨┐╨╡╤А╨╡╨║╨╗╤О╤З╨╡╨╜╨╕╨╣ ╨▒╨░╨╣╨┐╨░╤Б-╨╕╨╜╨▓╨╡╤А╤В╨╛╤А"
+      },
+      "battery_end_of_discharge": {
+        "name": "╨а╨░╨╖╤А╤П╨┤ ╨Р╨Ъ╨С (╨║╨╛╨╜╨╡╤Ж ╤А╨░╨╖╤А╤П╨┤╨░)"
+      },
+      "battery_test_success": {
+        "name": "╨в╨╡╤Б╤В ╨Р╨Ъ╨С ╤Г╤Б╨┐╨╡╤И╨╡╨╜"
+      },
+      "power_on_prohibited": {
+        "name": "╨Т╨║╨╗╤О╤З╨╡╨╜╨╕╨╡ ╨╖╨░╨┐╤А╨╡╤Й╨╡╨╜╨╛"
+      },
+      "battery_test_failed": {
+        "name": "╨в╨╡╤Б╤В ╨Р╨Ъ╨С ╨╜╨╡ ╨┐╤А╨╛╨╣╨┤╨╡╨╜"
+      },
+      "parallel_current_sharing_abnormality": {
+        "name": "╨Р╨╜╨╛╨╝╨░╨╗╨╕╤П ╤А╨░╨╖╨┤╨╡╨╗╨╡╨╜╨╕╤П ╤В╨╛╨║╨░ (╨┐╨░╤А╨░╨╗╨╗╨╡╨╗╤М)"
+      },
+      "inverter_phase_lock_abnormality": {
+        "name": "╨Р╨╜╨╛╨╝╨░╨╗╨╕╤П ╤Д╨░╨╖╨╛╨▓╨╛╨╣ ╤Б╨╕╨╜╤Е╤А╨╛╨╜╨╕╨╖╨░╤Ж╨╕╨╕ ╨╕╨╜╨▓╨╡╤А╤В╨╛╤А╨░"
+      },
+      "battery_maintenance_success": {
+        "name": "╨Ю╨▒╤Б╨╗╤Г╨╢╨╕╨▓╨░╤О╤Й╨╕╨╣ ╤А╨░╨╖╤А╤П╨┤ ╨Р╨Ъ╨С ╤Г╤Б╨┐╨╡╤И╨╡╨╜"
+      },
+      "battery_maintenance_abnormality": {
+        "name": "╨Р╨╜╨╛╨╝╨░╨╗╨╕╤П ╨╛╨▒╤Б╨╗╤Г╨╢╨╕╨▓╨░╤О╤Й╨╡╨│╨╛ ╤А╨░╨╖╤А╤П╨┤╨░ ╨Р╨Ъ╨С"
+      },
+      "input_current_unbalanced": {
+        "name": "╨Ф╨╕╤Б╨▒╨░╨╗╨░╨╜╤Б ╨▓╤Е╨╛╨┤╨╜╨╛╨│╨╛ ╤В╨╛╨║╨░"
+      },
+      "pfc_abnormality_2": {
+        "name": "╨Р╨╜╨╛╨╝╨░╨╗╨╕╤П PFC (2)"
+      },
+      "bus_low_to_battery_switching_limited": {
+        "name": "╨Ю╨│╤А╨░╨╜╨╕╤З╨╡╨╜╨╕╨╡ ╨┐╨╡╤А╨╡╨║╨╗╤О╤З╨╡╨╜╨╕╨╣ BUS low - ╨Р╨Ъ╨С"
+      },
+      "mains_abnormality": {
+        "name": "╨Р╨╜╨╛╨╝╨░╨╗╨╕╤П ╤Б╨╡╤В╨╕"
+      },
+      "bypass_abnormality": {
+        "name": "╨Р╨╜╨╛╨╝╨░╨╗╨╕╤П ╨▒╨░╨╣╨┐╨░╤Б╨░"
+      },
+      "bypass_frequency_abnormality": {
+        "name": "╨Р╨╜╨╛╨╝╨░╨╗╨╕╤П ╤З╨░╤Б╤В╨╛╤В╤Л ╨▒╨░╨╣╨┐╨░╤Б╨░"
+      },
+      "inconsistent_inverter_output_voltage_detection": {
+        "name": "╨а╨░╤Б╤Е╨╛╨╢╨┤╨╡╨╜╨╕╨╡ ╨┤╨╡╤В╨╡╨║╤Ж╨╕╨╕ ╨▓╤Л╤Е. ╨╜╨░╨┐╤А╤П╨╢╨╡╨╜╨╕╤П ╨╕╨╜╨▓╨╡╤А╤В╨╛╤А╨░"
+      },
+      "battery_voltage_abnormality": {
+        "name": "╨Р╨╜╨╛╨╝╨░╨╗╨╕╤П ╨╜╨░╨┐╤А╤П╨╢╨╡╨╜╨╕╤П ╨Р╨Ъ╨С"
+      },
+      "inconsistent_bypass_output_voltage_detection": {
+        "name": "╨а╨░╤Б╤Е╨╛╨╢╨┤╨╡╨╜╨╕╨╡ ╨┤╨╡╤В╨╡╨║╤Ж╨╕╨╕ ╨╜╨░╨┐╤А╤П╨╢╨╡╨╜╨╕╤П ╨▒╨░╨╣╨┐╨░╤Б╨░"
+      },
+      "instable_load_unused": {
+        "name": "╨Э╨╡╤Б╤В╨░╨▒╨╕╨╗╤М╨╜╨░╤П ╨╜╨░╨│╤А╤Г╨╖╨║╨░ (╨╜╨╡ ╨╕╤Б╨┐╨╛╨╗╤М╨╖╤Г╨╡╤В╤Б╤П)"
+      },
+      "maintain_bypass_enabled": {
+        "name": "╨Т╨║╨╗╤О╤З╤С╨╜ ╨╛╨▒╤Б╨╗╤Г╨╢╨╕╨▓╨░╤О╤Й╨╕╨╣ ╨▒╨░╨╣╨┐╨░╤Б"
+      },
+      "frequent_overtemperature": {
+        "name": "╨з╨░╤Б╤В╤Л╨╣ ╨┐╨╡╤А╨╡╨│╤А╨╡╨▓"
+      },
+      "parallel_battery_count_inconsistent": {
+        "name": "╨Э╨╡╤Б╨╛╨▓╨┐╨░╨┤╨╡╨╜╨╕╨╡ ╤З╨╕╤Б╨╗╨░ ╨Р╨Ъ╨С (╨┐╨░╤А╨░╨╗╨╗╨╡╨╗╤М)"
+      },
+      "battery_temp_compensation_abnormal_unused": {
+        "name": "╨Р╨╜╨╛╨╝╨░╨╗╨╕╤П ╤В╨╡╨╝╨┐. ╨║╨╛╨╝╨┐╨╡╨╜╤Б╨░╤Ж╨╕╨╕ ╨Р╨Ъ╨С (╨╜╨╡ ╨╕╤Б╨┐╨╛╨╗╤М╨╖╤Г╨╡╤В╤Б╤П)"
+      },
+      "instable_bypass_voltage_unused": {
+        "name": "╨Э╨╡╤Б╤В╨░╨▒╨╕╨╗╤М╨╜╨╛╨╡ ╨╜╨░╨┐╤А╤П╨╢╨╡╨╜╨╕╨╡ ╨▒╨░╨╣╨┐╨░╤Б╨░ (╨╜╨╡ ╨╕╤Б╨┐╨╛╨╗╤М╨╖╤Г╨╡╤В╤Б╤П)"
+      },
+      "test_mode": {
+        "name": "╨а╨╡╨╢╨╕╨╝ ╤В╨╡╤Б╤В╨░"
+      },
+      "overload_frequently": {
+        "name": "╨з╨░╤Б╤В╨░╤П ╨┐╨╡╤А╨╡╨│╤А╤Г╨╖╨║╨░"
+      }
     },
     "button": {
-      "clear_fault": { "name": "Сбросить неисправность" },
-      "buzzer_silence": { "name": "Отключить зуммер" },
-      "manual_switch_bypass": { "name": "Переключить на байпас вручную" },
-      "manual_switch_inverter": { "name": "Переключить на инвертор вручную" },
-      "battery_test_20s": { "name": "Тест АКБ (разряд 20 с)" },
-      "battery_maintenance": { "name": "Обслуживающий разряд АКБ" },
-      "stop_battery_test": { "name": "Остановить тест АКБ" }
+      "clear_fault": {
+        "name": "Сбросить неисправность"
+      },
+      "buzzer_silence": {
+        "name": "Отключить зуммер"
+      },
+      "manual_switch_bypass": {
+        "name": "Переключить на байпас вручную"
+      },
+      "manual_switch_inverter": {
+        "name": "Переключить на инвертор вручную"
+      },
+      "battery_test_20s": {
+        "name": "Тест АКБ (разряд 20 с)"
+      },
+      "battery_maintenance": {
+        "name": "Обслуживающий разряд АКБ"
+      },
+      "stop_battery_test": {
+        "name": "Остановить тест АКБ"
+      }
     }
   }
 }

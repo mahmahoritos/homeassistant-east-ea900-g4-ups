@@ -7,3 +7,4 @@ venv/
 .idea/
 .vscode/
 _ref_ever_powerline/
+scripts/_out_bits.json

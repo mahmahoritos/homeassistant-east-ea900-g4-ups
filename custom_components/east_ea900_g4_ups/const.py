@@ -9,8 +9,14 @@ DEFAULT_PORT: Final = 502
 DEFAULT_SLAVE_ID: Final = 1
 DEFAULT_SCAN_INTERVAL: Final = 10
 
-# Modbus: discrete inputs (FC 0x02), addresses 0..95 per manufacturer doc
+# Modbus: discrete inputs (FC 0x02), logical map 0..95 per manufacturer doc.
+# Reserved bits 32–47 and 79 are skipped in FC 0x02 reads (see DISCRETE_INPUT_READ_SEGMENTS).
 DISCRETE_INPUT_COUNT: Final = 96
+DISCRETE_INPUT_READ_SEGMENTS: Final[tuple[tuple[int, int], ...]] = (
+    (0, 32),  # 0..31
+    (48, 31),  # 48..78
+    (80, 16),  # 80..95
+)
 
 # Input registers (FC 0x04), addresses 0..71
 INPUT_REGISTER_COUNT: Final = 72

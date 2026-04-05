@@ -29,11 +29,22 @@ Copy `custom_components/east_ea900_g4_ups` into your Home Assistant `config/cust
 
 ## Entities overview
 
-- **Sensors**: input/output electrical values, battery, temperatures, software version fields (when available), status word, operating mode code
-- **Binary sensors**: selected alarm bits from the discrete-input table (enable more in the entity registry if needed)
+- **Sensors**: input/output electrical values, battery, temperatures, software version fields (when available), status word, **system operating mode** (ENUM + raw `code` attribute), **active / apparent / reactive power** in **kW / kVA / kvar** with **0.1** resolution per Modbus (one decimal in the UI)
+- **Binary sensors**: discrete-input alarm bits **except reserved** manufacturer positions (bits 32–47 and 79); those addresses are **not** requested over Modbus (three FC 0x02 reads: 0–31, 48–78, 80–95). A subset of entities is enabled by default, the rest can be turned on in the entity registry
 - **Buttons**: clear fault, buzzer silence, battery test (20 s), stop battery test, optional manual bypass/inverter and maintenance discharge (disabled by default)
 
-**Note:** Numeric **system operating mode** values are device-specific; extend automations using numeric thresholds or map values after observing your unit.
+### System operating mode (register 71)
+
+| Code (attribute `code`) | English (UI)   | Русский (UI)        |
+|-------------------------|----------------|---------------------|
+| 3                       | Bypass mode    | Режим байпаса       |
+| 4                       | Online mode    | Нормальный режим    |
+| 6                       | Battery mode   | Режим работы от батарей |
+| 0, 1, 2, 5, 7–10        | Mode *n*       | Режим *n*           |
+| \>10                    | Mode above 10  | Режим выше 10       |
+| unavailable             | Unknown        | Неизвестно          |
+
+Automations can use the numeric attribute `code` on **System operating mode** when needed.
 
 ## Credits
 

@@ -14,11 +14,9 @@ from homeassistant.components.sensor import (
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import (
     PERCENTAGE,
-    UnitOfApparentPower,
     UnitOfElectricCurrent,
     UnitOfElectricPotential,
     UnitOfFrequency,
-    UnitOfPower,
     UnitOfTemperature,
     UnitOfTime,
 )
@@ -28,6 +26,7 @@ from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import DOMAIN
 from .coordinator import EastEA900G4UPSCoordinator
+from .operating_mode import SYSTEM_OPERATING_MODE_OPTIONS
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -35,6 +34,7 @@ class EastUPSSensorEntityDescription(SensorEntityDescription):
     """Describes EAST UPS sensor entity."""
 
     value_key: str
+    raw_value_key: str | None = None
 
 
 SENSOR_DESCRIPTIONS: tuple[EastUPSSensorEntityDescription, ...] = (
@@ -177,25 +177,28 @@ SENSOR_DESCRIPTIONS: tuple[EastUPSSensorEntityDescription, ...] = (
     EastUPSSensorEntityDescription(
         key="output_apparent_power",
         translation_key="output_apparent_power",
-        native_unit_of_measurement=UnitOfApparentPower.VOLT_AMPERE,
+        native_unit_of_measurement="kVA",
         device_class=SensorDeviceClass.APPARENT_POWER,
         state_class=SensorStateClass.MEASUREMENT,
+        suggested_display_precision=1,
         value_key="output_apparent_power",
     ),
     EastUPSSensorEntityDescription(
         key="output_active_power",
         translation_key="output_active_power",
-        native_unit_of_measurement=UnitOfPower.WATT,
+        native_unit_of_measurement="kW",
         device_class=SensorDeviceClass.POWER,
         state_class=SensorStateClass.MEASUREMENT,
+        suggested_display_precision=1,
         value_key="output_active_power",
     ),
     EastUPSSensorEntityDescription(
         key="output_reactive_power",
         translation_key="output_reactive_power",
-        native_unit_of_measurement="var",
+        native_unit_of_measurement="kvar",
         device_class=SensorDeviceClass.REACTIVE_POWER,
         state_class=SensorStateClass.MEASUREMENT,
+        suggested_display_precision=1,
         value_key="output_reactive_power",
         entity_registry_enabled_default=False,
     ),
@@ -285,8 +288,10 @@ SENSOR_DESCRIPTIONS: tuple[EastUPSSensorEntityDescription, ...] = (
     EastUPSSensorEntityDescription(
         key="system_operating_mode",
         translation_key="system_operating_mode",
-        state_class=SensorStateClass.MEASUREMENT,
-        value_key="system_operating_mode",
+        device_class=SensorDeviceClass.ENUM,
+        options=list(SYSTEM_OPERATING_MODE_OPTIONS),
+        value_key="system_operating_mode_state",
+        raw_value_key="system_operating_mode",
         icon="mdi:state-machine",
     ),
 )
@@ -329,3 +334,14 @@ class EastUPSSensor(CoordinatorEntity[EastEA900G4UPSCoordinator], SensorEntity):
         if self.coordinator.data is None:
             return None
         return self.coordinator.data.get(self.entity_description.value_key)
+
+    @property
+    def extra_state_attributes(self) -> dict[str, Any] | None:
+        """Expose raw Modbus code for operating mode (and extended codes)."""
+        rvk = self.entity_description.raw_value_key
+        if not rvk or self.coordinator.data is None:
+            return None
+        raw = self.coordinator.data.get(rvk)
+        if raw is None:
+            return None
+        return {"code": int(raw)}
