@@ -167,7 +167,7 @@ RU = {
     "bypass_abnormality": "Аномалия байпаса",
     "bypass_frequency_abnormality": "Аномалия частоты байпаса",
     "inconsistent_inverter_output_voltage_detection": (
-        "Расхождение детекции вых. напряжения инвертора"
+        "Расхождение детекции выходного напряжения инвертора"
     ),
     "battery_voltage_abnormality": "Аномалия напряжения АКБ",
     "inconsistent_bypass_output_voltage_detection": (
