@@ -7,4 +7,14 @@ venv/
 .idea/
 .vscode/
 _ref_ever_powerline/
+
+# Generated when running scripts/gen_bits_translations.py (regenerate locally)
 scripts/_out_bits.json
+
+# OS / editor noise
+Thumbs.db
+.DS_Store
+
+# Manufacturer Modbus PDF (binary; keep locally, do not commit)
+EA900*.pdf
+**/EA900*.pdf
