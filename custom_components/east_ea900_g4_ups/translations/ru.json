@@ -26,113 +26,88 @@
   "entity": {
     "sensor": {
       "bypass_voltage_a": {
-        "name": "Напряжение байпаса L1",
-        "unit_of_measurement": "В"
+        "name": "Напряжение байпаса L1 (В)"
       },
       "bypass_current_a": {
-        "name": "Ток байпаса L1",
-        "unit_of_measurement": "А"
+        "name": "Ток байпаса L1 (А)"
       },
       "bypass_frequency": {
-        "name": "Частота байпаса",
-        "unit_of_measurement": "Гц"
+        "name": "Частота байпаса (Гц)"
       },
       "bypass_power_factor": {
         "name": "Коэффициент мощности байпаса"
       },
       "input_voltage_a": {
-        "name": "Входное напряжение L1",
-        "unit_of_measurement": "В"
+        "name": "Входное напряжение L1 (В)"
       },
       "input_voltage_b": {
-        "name": "Входное напряжение L2",
-        "unit_of_measurement": "В"
+        "name": "Входное напряжение L2 (В)"
       },
       "input_voltage_c": {
-        "name": "Входное напряжение L3",
-        "unit_of_measurement": "В"
+        "name": "Входное напряжение L3 (В)"
       },
       "input_current_a": {
-        "name": "Входной ток L1",
-        "unit_of_measurement": "А"
+        "name": "Входной ток L1 (А)"
       },
       "input_current_b": {
-        "name": "Входной ток L2",
-        "unit_of_measurement": "А"
+        "name": "Входной ток L2 (А)"
       },
       "input_current_c": {
-        "name": "Входной ток L3",
-        "unit_of_measurement": "А"
+        "name": "Входной ток L3 (А)"
       },
       "input_frequency": {
-        "name": "Входная частота",
-        "unit_of_measurement": "Гц"
+        "name": "Входная частота (Гц)"
       },
       "input_power_factor": {
         "name": "Коэффициент мощности на входе"
       },
       "output_voltage_a": {
-        "name": "Выходное напряжение L1",
-        "unit_of_measurement": "В"
+        "name": "Выходное напряжение L1 (В)"
       },
       "output_current_a": {
-        "name": "Выходной ток L1",
-        "unit_of_measurement": "А"
+        "name": "Выходной ток L1 (А)"
       },
       "output_frequency": {
-        "name": "Выходная частота",
-        "unit_of_measurement": "Гц"
+        "name": "Выходная частота (Гц)"
       },
       "output_power_factor": {
         "name": "Коэффициент мощности на выходе"
       },
       "output_apparent_power": {
-        "name": "Полная мощность на выходе",
-        "unit_of_measurement": "ВА"
+        "name": "Полная мощность на выходе (ВА)"
       },
       "output_active_power": {
-        "name": "Активная мощность на выходе",
-        "unit_of_measurement": "Вт"
+        "name": "Активная мощность на выходе (Вт)"
       },
       "output_reactive_power": {
-        "name": "Реактивная мощность на выходе",
-        "unit_of_measurement": "ВАр"
+        "name": "Реактивная мощность на выходе (ВАр)"
       },
       "output_load_percent": {
-        "name": "Загрузка на выходе",
-        "unit_of_measurement": "%"
+        "name": "Загрузка на выходе (%)"
       },
       "battery_voltage": {
-        "name": "Напряжение АКБ",
-        "unit_of_measurement": "В"
+        "name": "Напряжение АКБ (В)"
       },
       "battery_current": {
-        "name": "Ток АКБ",
-        "unit_of_measurement": "А"
+        "name": "Ток АКБ (А)"
       },
       "battery_temperature": {
-        "name": "Температура АКБ",
-        "unit_of_measurement": "°C"
+        "name": "Температура АКБ (°C)"
       },
       "battery_runtime_remaining": {
-        "name": "Оставшееся время автономии",
-        "unit_of_measurement": "мин"
+        "name": "Оставшееся время автономии (мин)"
       },
       "battery_capacity": {
-        "name": "Ёмкость АКБ",
-        "unit_of_measurement": "%"
+        "name": "Ёмкость АКБ (%)"
       },
       "inverter_current": {
-        "name": "Ток инвертора",
-        "unit_of_measurement": "А"
+        "name": "Ток инвертора (А)"
       },
       "rectifier_temperature": {
-        "name": "Температура выпрямителя",
-        "unit_of_measurement": "°C"
+        "name": "Температура выпрямителя (°C)"
       },
       "inverter_temperature": {
-        "name": "Температура инвертора",
-        "unit_of_measurement": "°C"
+        "name": "Температура инвертора (°C)"
       },
       "status_word": {
         "name": "Слово состояния"
