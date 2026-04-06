@@ -12,17 +12,6 @@ from homeassistant.components.sensor import (
     SensorStateClass,
 )
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import (
-    PERCENTAGE,
-    UnitOfApparentPower,
-    UnitOfElectricCurrent,
-    UnitOfElectricPotential,
-    UnitOfFrequency,
-    UnitOfPower,
-    UnitOfReactivePower,
-    UnitOfTemperature,
-    UnitOfTime,
-)
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
@@ -30,13 +19,6 @@ from homeassistant.helpers.update_coordinator import CoordinatorEntity
 from .const import DOMAIN
 from .coordinator import EastEA900G4UPSCoordinator
 from .operating_mode import SYSTEM_OPERATING_MODE_OPTIONS
-
-# HA 2025.12+: VOLT_AMPERE_REACTIVE; older cores used VAR (removed in newer HA).
-_REACTIVE_POWER_UNIT: str = getattr(
-    UnitOfReactivePower,
-    "VOLT_AMPERE_REACTIVE",
-    getattr(UnitOfReactivePower, "VAR", "var"),
-)
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -51,7 +33,6 @@ SENSOR_DESCRIPTIONS: tuple[EastUPSSensorEntityDescription, ...] = (
     EastUPSSensorEntityDescription(
         key="bypass_voltage_a",
         translation_key="bypass_voltage_a",
-        native_unit_of_measurement=UnitOfElectricPotential.VOLT,
         device_class=SensorDeviceClass.VOLTAGE,
         state_class=SensorStateClass.MEASUREMENT,
         value_key="bypass_voltage_a",
@@ -60,7 +41,6 @@ SENSOR_DESCRIPTIONS: tuple[EastUPSSensorEntityDescription, ...] = (
     EastUPSSensorEntityDescription(
         key="bypass_current_a",
         translation_key="bypass_current_a",
-        native_unit_of_measurement=UnitOfElectricCurrent.AMPERE,
         device_class=SensorDeviceClass.CURRENT,
         state_class=SensorStateClass.MEASUREMENT,
         value_key="bypass_current_a",
@@ -69,7 +49,6 @@ SENSOR_DESCRIPTIONS: tuple[EastUPSSensorEntityDescription, ...] = (
     EastUPSSensorEntityDescription(
         key="bypass_frequency",
         translation_key="bypass_frequency",
-        native_unit_of_measurement=UnitOfFrequency.HERTZ,
         device_class=SensorDeviceClass.FREQUENCY,
         state_class=SensorStateClass.MEASUREMENT,
         value_key="bypass_frequency",
@@ -86,7 +65,6 @@ SENSOR_DESCRIPTIONS: tuple[EastUPSSensorEntityDescription, ...] = (
     EastUPSSensorEntityDescription(
         key="input_voltage_a",
         translation_key="input_voltage_a",
-        native_unit_of_measurement=UnitOfElectricPotential.VOLT,
         device_class=SensorDeviceClass.VOLTAGE,
         state_class=SensorStateClass.MEASUREMENT,
         value_key="input_voltage_a",
@@ -94,7 +72,6 @@ SENSOR_DESCRIPTIONS: tuple[EastUPSSensorEntityDescription, ...] = (
     EastUPSSensorEntityDescription(
         key="input_voltage_b",
         translation_key="input_voltage_b",
-        native_unit_of_measurement=UnitOfElectricPotential.VOLT,
         device_class=SensorDeviceClass.VOLTAGE,
         state_class=SensorStateClass.MEASUREMENT,
         value_key="input_voltage_b",
@@ -103,7 +80,6 @@ SENSOR_DESCRIPTIONS: tuple[EastUPSSensorEntityDescription, ...] = (
     EastUPSSensorEntityDescription(
         key="input_voltage_c",
         translation_key="input_voltage_c",
-        native_unit_of_measurement=UnitOfElectricPotential.VOLT,
         device_class=SensorDeviceClass.VOLTAGE,
         state_class=SensorStateClass.MEASUREMENT,
         value_key="input_voltage_c",
@@ -112,7 +88,6 @@ SENSOR_DESCRIPTIONS: tuple[EastUPSSensorEntityDescription, ...] = (
     EastUPSSensorEntityDescription(
         key="input_current_a",
         translation_key="input_current_a",
-        native_unit_of_measurement=UnitOfElectricCurrent.AMPERE,
         device_class=SensorDeviceClass.CURRENT,
         state_class=SensorStateClass.MEASUREMENT,
         value_key="input_current_a",
@@ -121,7 +96,6 @@ SENSOR_DESCRIPTIONS: tuple[EastUPSSensorEntityDescription, ...] = (
     EastUPSSensorEntityDescription(
         key="input_current_b",
         translation_key="input_current_b",
-        native_unit_of_measurement=UnitOfElectricCurrent.AMPERE,
         device_class=SensorDeviceClass.CURRENT,
         state_class=SensorStateClass.MEASUREMENT,
         value_key="input_current_b",
@@ -130,7 +104,6 @@ SENSOR_DESCRIPTIONS: tuple[EastUPSSensorEntityDescription, ...] = (
     EastUPSSensorEntityDescription(
         key="input_current_c",
         translation_key="input_current_c",
-        native_unit_of_measurement=UnitOfElectricCurrent.AMPERE,
         device_class=SensorDeviceClass.CURRENT,
         state_class=SensorStateClass.MEASUREMENT,
         value_key="input_current_c",
@@ -139,7 +112,6 @@ SENSOR_DESCRIPTIONS: tuple[EastUPSSensorEntityDescription, ...] = (
     EastUPSSensorEntityDescription(
         key="input_frequency",
         translation_key="input_frequency",
-        native_unit_of_measurement=UnitOfFrequency.HERTZ,
         device_class=SensorDeviceClass.FREQUENCY,
         state_class=SensorStateClass.MEASUREMENT,
         value_key="input_frequency",
@@ -155,7 +127,6 @@ SENSOR_DESCRIPTIONS: tuple[EastUPSSensorEntityDescription, ...] = (
     EastUPSSensorEntityDescription(
         key="output_voltage_a",
         translation_key="output_voltage_a",
-        native_unit_of_measurement=UnitOfElectricPotential.VOLT,
         device_class=SensorDeviceClass.VOLTAGE,
         state_class=SensorStateClass.MEASUREMENT,
         value_key="output_voltage_a",
@@ -163,7 +134,6 @@ SENSOR_DESCRIPTIONS: tuple[EastUPSSensorEntityDescription, ...] = (
     EastUPSSensorEntityDescription(
         key="output_current_a",
         translation_key="output_current_a",
-        native_unit_of_measurement=UnitOfElectricCurrent.AMPERE,
         device_class=SensorDeviceClass.CURRENT,
         state_class=SensorStateClass.MEASUREMENT,
         value_key="output_current_a",
@@ -171,7 +141,6 @@ SENSOR_DESCRIPTIONS: tuple[EastUPSSensorEntityDescription, ...] = (
     EastUPSSensorEntityDescription(
         key="output_frequency",
         translation_key="output_frequency",
-        native_unit_of_measurement=UnitOfFrequency.HERTZ,
         device_class=SensorDeviceClass.FREQUENCY,
         state_class=SensorStateClass.MEASUREMENT,
         value_key="output_frequency",
@@ -187,7 +156,6 @@ SENSOR_DESCRIPTIONS: tuple[EastUPSSensorEntityDescription, ...] = (
     EastUPSSensorEntityDescription(
         key="output_apparent_power",
         translation_key="output_apparent_power",
-        native_unit_of_measurement=UnitOfApparentPower.VOLT_AMPERE,
         device_class=SensorDeviceClass.APPARENT_POWER,
         state_class=SensorStateClass.MEASUREMENT,
         suggested_display_precision=0,
@@ -196,7 +164,6 @@ SENSOR_DESCRIPTIONS: tuple[EastUPSSensorEntityDescription, ...] = (
     EastUPSSensorEntityDescription(
         key="output_active_power",
         translation_key="output_active_power",
-        native_unit_of_measurement=UnitOfPower.WATT,
         device_class=SensorDeviceClass.POWER,
         state_class=SensorStateClass.MEASUREMENT,
         suggested_display_precision=0,
@@ -205,7 +172,6 @@ SENSOR_DESCRIPTIONS: tuple[EastUPSSensorEntityDescription, ...] = (
     EastUPSSensorEntityDescription(
         key="output_reactive_power",
         translation_key="output_reactive_power",
-        native_unit_of_measurement=_REACTIVE_POWER_UNIT,
         device_class=SensorDeviceClass.REACTIVE_POWER,
         state_class=SensorStateClass.MEASUREMENT,
         suggested_display_precision=0,
@@ -215,7 +181,6 @@ SENSOR_DESCRIPTIONS: tuple[EastUPSSensorEntityDescription, ...] = (
     EastUPSSensorEntityDescription(
         key="output_load_percent",
         translation_key="output_load_percent",
-        native_unit_of_measurement=PERCENTAGE,
         state_class=SensorStateClass.MEASUREMENT,
         value_key="output_load_percent",
         icon="mdi:gauge",
@@ -223,7 +188,6 @@ SENSOR_DESCRIPTIONS: tuple[EastUPSSensorEntityDescription, ...] = (
     EastUPSSensorEntityDescription(
         key="battery_voltage",
         translation_key="battery_voltage",
-        native_unit_of_measurement=UnitOfElectricPotential.VOLT,
         device_class=SensorDeviceClass.VOLTAGE,
         state_class=SensorStateClass.MEASUREMENT,
         value_key="battery_voltage",
@@ -231,7 +195,6 @@ SENSOR_DESCRIPTIONS: tuple[EastUPSSensorEntityDescription, ...] = (
     EastUPSSensorEntityDescription(
         key="battery_current",
         translation_key="battery_current",
-        native_unit_of_measurement=UnitOfElectricCurrent.AMPERE,
         device_class=SensorDeviceClass.CURRENT,
         state_class=SensorStateClass.MEASUREMENT,
         value_key="battery_current",
@@ -239,7 +202,6 @@ SENSOR_DESCRIPTIONS: tuple[EastUPSSensorEntityDescription, ...] = (
     EastUPSSensorEntityDescription(
         key="battery_temperature",
         translation_key="battery_temperature",
-        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
         state_class=SensorStateClass.MEASUREMENT,
         value_key="battery_temperature",
@@ -248,7 +210,6 @@ SENSOR_DESCRIPTIONS: tuple[EastUPSSensorEntityDescription, ...] = (
     EastUPSSensorEntityDescription(
         key="battery_runtime_remaining",
         translation_key="battery_runtime_remaining",
-        native_unit_of_measurement=UnitOfTime.MINUTES,
         device_class=SensorDeviceClass.DURATION,
         state_class=SensorStateClass.MEASUREMENT,
         value_key="battery_runtime_remaining",
@@ -257,7 +218,6 @@ SENSOR_DESCRIPTIONS: tuple[EastUPSSensorEntityDescription, ...] = (
     EastUPSSensorEntityDescription(
         key="battery_capacity",
         translation_key="battery_capacity",
-        native_unit_of_measurement=PERCENTAGE,
         device_class=SensorDeviceClass.BATTERY,
         state_class=SensorStateClass.MEASUREMENT,
         value_key="battery_capacity",
@@ -265,7 +225,6 @@ SENSOR_DESCRIPTIONS: tuple[EastUPSSensorEntityDescription, ...] = (
     EastUPSSensorEntityDescription(
         key="inverter_current",
         translation_key="inverter_current",
-        native_unit_of_measurement=UnitOfElectricCurrent.AMPERE,
         device_class=SensorDeviceClass.CURRENT,
         state_class=SensorStateClass.MEASUREMENT,
         value_key="inverter_current",
@@ -274,7 +233,6 @@ SENSOR_DESCRIPTIONS: tuple[EastUPSSensorEntityDescription, ...] = (
     EastUPSSensorEntityDescription(
         key="rectifier_temperature",
         translation_key="rectifier_temperature",
-        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
         state_class=SensorStateClass.MEASUREMENT,
         value_key="rectifier_temperature",
@@ -283,7 +241,6 @@ SENSOR_DESCRIPTIONS: tuple[EastUPSSensorEntityDescription, ...] = (
     EastUPSSensorEntityDescription(
         key="inverter_temperature",
         translation_key="inverter_temperature",
-        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=SensorDeviceClass.TEMPERATURE,
         state_class=SensorStateClass.MEASUREMENT,
         value_key="inverter_temperature",

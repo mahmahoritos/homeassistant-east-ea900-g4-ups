@@ -26,88 +26,113 @@
   "entity": {
     "sensor": {
       "bypass_voltage_a": {
-        "name": "Bypass voltage L1"
+        "name": "Bypass voltage L1",
+        "unit_of_measurement": "V"
       },
       "bypass_current_a": {
-        "name": "Bypass current L1"
+        "name": "Bypass current L1",
+        "unit_of_measurement": "A"
       },
       "bypass_frequency": {
-        "name": "Bypass frequency"
+        "name": "Bypass frequency",
+        "unit_of_measurement": "Hz"
       },
       "bypass_power_factor": {
         "name": "Bypass power factor"
       },
       "input_voltage_a": {
-        "name": "Input voltage L1"
+        "name": "Input voltage L1",
+        "unit_of_measurement": "V"
       },
       "input_voltage_b": {
-        "name": "Input voltage L2"
+        "name": "Input voltage L2",
+        "unit_of_measurement": "V"
       },
       "input_voltage_c": {
-        "name": "Input voltage L3"
+        "name": "Input voltage L3",
+        "unit_of_measurement": "V"
       },
       "input_current_a": {
-        "name": "Input current L1"
+        "name": "Input current L1",
+        "unit_of_measurement": "A"
       },
       "input_current_b": {
-        "name": "Input current L2"
+        "name": "Input current L2",
+        "unit_of_measurement": "A"
       },
       "input_current_c": {
-        "name": "Input current L3"
+        "name": "Input current L3",
+        "unit_of_measurement": "A"
       },
       "input_frequency": {
-        "name": "Input frequency"
+        "name": "Input frequency",
+        "unit_of_measurement": "Hz"
       },
       "input_power_factor": {
         "name": "Input power factor"
       },
       "output_voltage_a": {
-        "name": "Output voltage L1"
+        "name": "Output voltage L1",
+        "unit_of_measurement": "V"
       },
       "output_current_a": {
-        "name": "Output current L1"
+        "name": "Output current L1",
+        "unit_of_measurement": "A"
       },
       "output_frequency": {
-        "name": "Output frequency"
+        "name": "Output frequency",
+        "unit_of_measurement": "Hz"
       },
       "output_power_factor": {
         "name": "Output power factor"
       },
       "output_apparent_power": {
-        "name": "Output apparent power (VA)"
+        "name": "Output apparent power",
+        "unit_of_measurement": "VA"
       },
       "output_active_power": {
-        "name": "Output active power (W)"
+        "name": "Output active power",
+        "unit_of_measurement": "W"
       },
       "output_reactive_power": {
-        "name": "Output reactive power (var)"
+        "name": "Output reactive power",
+        "unit_of_measurement": "var"
       },
       "output_load_percent": {
-        "name": "Output load"
+        "name": "Output load",
+        "unit_of_measurement": "%"
       },
       "battery_voltage": {
-        "name": "Battery voltage"
+        "name": "Battery voltage",
+        "unit_of_measurement": "V"
       },
       "battery_current": {
-        "name": "Battery current"
+        "name": "Battery current",
+        "unit_of_measurement": "A"
       },
       "battery_temperature": {
-        "name": "Battery temperature"
+        "name": "Battery temperature",
+        "unit_of_measurement": "°C"
       },
       "battery_runtime_remaining": {
-        "name": "Battery runtime remaining"
+        "name": "Battery runtime remaining",
+        "unit_of_measurement": "min"
       },
       "battery_capacity": {
-        "name": "Battery capacity"
+        "name": "Battery capacity",
+        "unit_of_measurement": "%"
       },
       "inverter_current": {
-        "name": "Inverter current"
+        "name": "Inverter current",
+        "unit_of_measurement": "A"
       },
       "rectifier_temperature": {
-        "name": "Rectifier temperature"
+        "name": "Rectifier temperature",
+        "unit_of_measurement": "°C"
       },
       "inverter_temperature": {
-        "name": "Inverter temperature"
+        "name": "Inverter temperature",
+        "unit_of_measurement": "°C"
       },
       "status_word": {
         "name": "Status word"

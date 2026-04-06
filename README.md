@@ -4,7 +4,7 @@ Custom integration for **EAST EA900 G4** series UPS (6–20 kVA) via **Modbus TC
 
 ## Requirements
 
-- Home Assistant 2024.1 or newer
+- Home Assistant 2024.12 or newer (translated sensor units require core support from 2024.12)
 - Network access from Home Assistant to the Modbus TCP gateway
 - Correct RS232 parameters on the gateway (per UPS manual, commonly 9600 8N1)
 
