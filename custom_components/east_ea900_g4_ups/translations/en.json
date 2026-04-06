@@ -74,13 +74,13 @@
         "name": "Output power factor"
       },
       "output_apparent_power": {
-        "name": "Output apparent power (kVA)"
+        "name": "Output apparent power (VA)"
       },
       "output_active_power": {
-        "name": "Output active power (kW)"
+        "name": "Output active power (W)"
       },
       "output_reactive_power": {
-        "name": "Output reactive power (kvar)"
+        "name": "Output reactive power (var)"
       },
       "output_load_percent": {
         "name": "Output load"

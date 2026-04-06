@@ -29,7 +29,7 @@ Copy `custom_components/east_ea900_g4_ups` into your Home Assistant `config/cust
 
 ## Entities overview
 
-- **Sensors**: input/output electrical values, battery, temperatures, software version fields (when available), status word, **system operating mode** (ENUM + raw `code` attribute), **active / apparent / reactive power** in **kW / kVA / kvar** with **0.1** resolution per Modbus (one decimal in the UI)
+- **Sensors**: input/output electrical values, battery, temperatures, software version fields (when available), status word, **system operating mode** (ENUM + raw `code` attribute), **active / apparent / reactive power** shown in **W / VA / var**, rounded to **100** per quantity (Modbus still reports ×0.1 kW / kVA / kvar)
 - **Binary sensors**: discrete-input alarm bits **except reserved** manufacturer positions (bits 32–47 and 79); those addresses are **not** requested over Modbus (three FC 0x02 reads: 0–31, 48–78, 80–95). A subset of entities is enabled by default, the rest can be turned on in the entity registry
 - **Buttons**: clear fault, buzzer silence, battery test (20 s), stop battery test, optional manual bypass/inverter and maintenance discharge (disabled by default)
 

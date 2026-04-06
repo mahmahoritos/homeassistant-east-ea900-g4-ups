@@ -32,6 +32,14 @@ def _to_int16(unsigned: int) -> int:
     return unsigned
 
 
+def _kilo_to_watt_base_round_100(value_kilo: float | None) -> int | None:
+    """Convert kW/kVA/kvar to W/VA/var, rounded to 100 (UI step per product need)."""
+    if value_kilo is None:
+        return None
+    base = value_kilo * 1000.0
+    return int(round(base / 100.0) * 100.0)
+
+
 def _decode_ascii_registers(registers: list[int], max_chars: int) -> str:
     """Decode ASCII from consecutive 16-bit registers (high byte, low byte)."""
     chars: list[str] = []
@@ -156,21 +164,19 @@ class EastEA900G4UPSCoordinator(DataUpdateCoordinator[dict[str, Any]]):
                 data["output_frequency"] = self._scaled_int16(reg[30], 10.0)
                 data["output_power_factor"] = self._scaled_int16(reg[33], 100.0)
 
-                # Apparent power: register × 0.1 kVA (per protocol table).
+                # Apparent / active / reactive: protocol ×0.1 kVA / kW / kvar → W / VA / var, step 100.
                 s_kva = self._none_if_invalid(reg[36])
-                data["output_apparent_power"] = (
+                data["output_apparent_power"] = _kilo_to_watt_base_round_100(
                     None if s_kva is None else _to_int16(s_kva) * 0.1
                 )
 
-                # Active power: register × 0.1 kW.
                 p_kw = self._none_if_invalid(reg[39])
-                data["output_active_power"] = (
+                data["output_active_power"] = _kilo_to_watt_base_round_100(
                     None if p_kw is None else _to_int16(p_kw) * 0.1
                 )
 
-                # Reactive power: register × 0.1 kvar.
                 q_kvar = self._none_if_invalid(reg[42])
-                data["output_reactive_power"] = (
+                data["output_reactive_power"] = _kilo_to_watt_base_round_100(
                     None if q_kvar is None else _to_int16(q_kvar) * 0.1
                 )
 
