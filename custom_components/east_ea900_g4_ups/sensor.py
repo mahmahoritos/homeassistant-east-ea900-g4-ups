@@ -31,6 +31,13 @@ from .const import DOMAIN
 from .coordinator import EastEA900G4UPSCoordinator
 from .operating_mode import SYSTEM_OPERATING_MODE_OPTIONS
 
+# HA 2025.12+: VOLT_AMPERE_REACTIVE; older cores used VAR (removed in newer HA).
+_REACTIVE_POWER_UNIT: str = getattr(
+    UnitOfReactivePower,
+    "VOLT_AMPERE_REACTIVE",
+    getattr(UnitOfReactivePower, "VAR", "var"),
+)
+
 
 @dataclass(frozen=True, kw_only=True)
 class EastUPSSensorEntityDescription(SensorEntityDescription):
@@ -198,7 +205,7 @@ SENSOR_DESCRIPTIONS: tuple[EastUPSSensorEntityDescription, ...] = (
     EastUPSSensorEntityDescription(
         key="output_reactive_power",
         translation_key="output_reactive_power",
-        native_unit_of_measurement=UnitOfReactivePower.VAR,
+        native_unit_of_measurement=_REACTIVE_POWER_UNIT,
         device_class=SensorDeviceClass.REACTIVE_POWER,
         state_class=SensorStateClass.MEASUREMENT,
         suggested_display_precision=0,
