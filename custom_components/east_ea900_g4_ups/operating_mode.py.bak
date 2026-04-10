@@ -13,7 +13,7 @@ SYSTEM_OPERATING_MODE_OPTIONS: Final[tuple[str, ...]] = (
     "battery_mode",
     "test_battery_mode",
     "fault_mode",
-    "fixed-frequency_mode",
+    "fixed",
     "mode_0",
     "mode_1",
     "mode_9",

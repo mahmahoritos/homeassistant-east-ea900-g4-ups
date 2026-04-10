@@ -35,18 +35,18 @@ Copy `custom_components/east_ea900_g4_ups` into your Home Assistant `config/cust
 
 ### System operating mode (register 71)
 
-| Code (attribute `code`) | English (UI)           | Русский (UI)                          |
-|-------------------------|------------------------|---------------------------------------|
-| 2                       | Standby mode           | Режим ожидания                        |
-| 3                       | Bypass mode            | Режим байпаса                         |
+| Code (attribute `code`) | English (UI)           | Русский (UI)            |
+|-------------------------|------------------------|-------------------------|
+| 2                       | Standby mode           | Режим ожидания          |
+| 3                       | Bypass mode            | Режим байпаса           |
 | 4                       | Online mode            | Нормальный режим                      |
 | 5                       | Battery mode           | Режим работы от батарей               |
 | 6                       | Test battery mode      | Тест батарей (20 сек / обслуж.разряд) |
-| 7                       | Fault mode             | Аварийный режим                       |
-| 8                       | Fixed frequency mode   | Режим заданной частоты                |
-| 0, 1, 9–10              | Mode *n*               | Режим *n*                             |
-| \>10                    | Mode above 10          | Режим выше 10                         |
-| unavailable             | Unknown                | Неизвестно                            |
+| 7                       | Fault mode             | Аварийный режим |
+| 8                       | Fixed frequency mode   | Режим заданной частоты |
+| 0, 1, 9–10              | Mode *n*       | Режим *n*               |
+| \>10                    | Mode above 10  | Режим выше 10           |
+| unavailable             | Unknown        | Неизвестно              |
 
 Automations can use the numeric attribute `code` on **System operating mode** when needed.
 

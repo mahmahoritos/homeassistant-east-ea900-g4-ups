@@ -116,19 +116,19 @@
         "name": "System operating mode",
         "state": {
           "unknown": "Unknown",
+		  "standby_mode": "Standby mode",
           "bypass_mode": "Bypass mode",
           "online_mode": "Online mode",
           "battery_mode": "Battery mode",
+		  "test_battery_mode": "Test battery mode",
+		  "fault_mode": "Fault mode",
+		  "fixed-frequency_mode": "Fixed frequency mode",
           "mode_0": "Mode 0",
           "mode_1": "Mode 1",
-          "mode_2": "Mode 2",
-          "mode_5": "Mode 5",
-          "mode_7": "Mode 7",
-          "mode_8": "Mode 8",
           "mode_9": "Mode 9",
           "mode_10": "Mode 10",
           "mode_extended": "Mode above 10"
-        }
+		  }
       }
     },
     "binary_sensor": {
